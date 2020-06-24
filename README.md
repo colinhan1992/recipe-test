@@ -1,5 +1,9 @@
 # recipe-test
 
+A javascript coding assessment built with VueJS and Vuetify. 
+
+Note: This requires the setup of an external API to load data. 
+
 ## Project setup
 ```
 npm install
