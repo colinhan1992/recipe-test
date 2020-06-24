@@ -6,15 +6,16 @@
     <v-app-bar
       app
       color="indigo"
+      class="d-flex justify-center"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>My Recipies</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
       <v-container
         class="fill-height"
+        :fluid="$vuetify.breakpoint.lgOnly"
       >
         <v-row
           align="center"
@@ -41,35 +42,57 @@
                 {{ recipe.description }} 
 
                 </p>
+                <v-row justify="end">
+                <div class="mx-3 caption">
+                  Posted {{ recipe.postDate }}
+                </div>
+                </v-row>
               </v-card-text>
             </v-card>
             
           </v-col>
         </v-row>
       </v-container>
+
+      <v-dialog v-model="details"
+        max-width="750"
+        :fullscreen="$vuetify.breakpoint.xsOnly"
+      >
+        <recipe :recipe="selectedRecipe" :specials="specials" @close="details = false"></recipe>
+      </v-dialog>
+
     </v-main>
     <v-footer
       color="indigo"
       app
     >
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import recipe from "./components/recipe.vue"
+
   const axios = require('axios');
 
   export default {
     props: {
       source: String,
     },
+
     data: () => ({
       drawer: null,
       recipes: [],
       specials: [],
       errorMsg: '',
+      details: false,
+      selectedRecipe: null,
     }),
+
+    components: {
+      recipe: recipe
+    },
 
     methods: {
       load() {
