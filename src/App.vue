@@ -1,4 +1,3 @@
-
   
 <template>
   <v-app id="inspire">
@@ -61,6 +60,10 @@
         <recipe :recipe="selectedRecipe" :specials="specials" @close="details = false"></recipe>
       </v-dialog>
 
+      <v-snackbar bottom color="error" v-model="errorBar">
+        {{ errorMsg }}
+      </v-snackbar>
+
     </v-main>
     <v-footer
       color="indigo"
@@ -86,6 +89,7 @@
       recipes: [],
       specials: [],
       errorMsg: '',
+      errorBar: false,
       details: false,
       selectedRecipe: null,
     }),

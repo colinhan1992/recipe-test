@@ -50,7 +50,6 @@
 
     methods: {
       getSpecials(ingredient) {
-        console.log(this.specials.filter(s => s.ingredientId === ingredient.uuid))
         return this.specials.filter(s => s.ingredientId === ingredient.uuid)
       },
     },
